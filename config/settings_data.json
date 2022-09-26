@@ -68,7 +68,7 @@
             "type": "announcement",
             "disabled": true,
             "settings": {
-              "title": "1234サイトをリニューアルオープンしました。",
+              "title": "サイトをリニューアルオープンしました。",
               "link": "",
               "color_background": "#213141",
               "color_text": "#ffffff"
