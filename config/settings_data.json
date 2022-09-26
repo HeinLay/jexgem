@@ -58,7 +58,7 @@
           "announcement-bar-0": {
             "type": "announcement",
             "settings": {
-              "title": "リモートショッピングがご利用いただけるようになりました",
+              "title": "aaリモートショッピングがご利用いただけるようになりました",
               "link": "shopify:\/\/blogs\/topics\/remote-shopping",
               "color_background": "#213141",
               "color_text": "#ffffff"
