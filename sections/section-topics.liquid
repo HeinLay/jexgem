@@ -1,0 +1,26 @@
+
+<div class="sec-topics inner">
+	<h2 class="ttl ttl-level-01 ttl-theme-01" >Topics<span>お知らせ</span></h2>
+    <div class="topics-blk">
+        {% for article in blogs.topics.articles limit: 4 %}
+        <div class="topics-item">
+					<a href="{{ article.url }}" class="article-link">
+						<div class="date">{{ article.published_at | date: "%Y.%m.%d" }}</div>
+						<div class="article-content">{{ article.title | strip_html | truncatewords: 30 }} </div>
+					</a>
+        </div>      
+      {%- endfor -%}
+		</div>
+		<div class="btn-blk">
+			<a href="/blogs/topics/" class="btn btn-theme02">お知らせ一覧</a>
+		</div>
+  <!-- topic -->
+	</div>
+{% schema %}
+{
+  "name": "お知らせ",
+  "settings": []
+}
+{% endschema %}
+
+

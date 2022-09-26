@@ -1,0 +1,67 @@
+{%- liquid
+  assign swatch_options = settings.swatch_options | downcase | split: ', '
+  assign chip_options = settings.chip_options | downcase | split: ', '
+-%}
+
+{%- if results.filters or show_sort -%}
+  <form class="filter-drawer popover" data-filer-modal-wrapper data-filter-form>
+    <div class="filter-drawer__wash" data-drawer-wash></div>
+
+    {%- comment -%} Keep search term within form {%- endcomment -%}
+    {%- if results.terms -%}
+      <input type="hidden" name="q" value="{{ results.terms | escape }}">
+      <input name="options[prefix]" type="hidden" value="last">
+    {%- endif -%}
+
+    {%- if show_sort -%}
+      <div
+        class="filter-drawer__panel"
+        data-filter-modal="__sort"
+        aria-labelledby="modal-{{ 'filters.sort_title' | t }}"
+        aria-modal="true"
+        aria-hidden="true"
+      >
+
+        <button type="button" class="filter-drawer__close" aria-label="{{ 'general.accessibility.close_modal' | t }}" data-close-icon>
+          {% render 'icon-button' with icon: 'close-stroke' %}
+        </button>
+        <div class="filter-drawer__content" data-scroll-lock-ignore>
+          <div class="filter-drawer__heading">
+            <h2 id="modal-{{ 'filters.sort_title' | t }}" class="ff-heading fs-heading-2-large">{{ 'filters.sort_title' | t }}</h2>
+          </div>
+
+          <ul class="filter-drawer__list">
+            {%- for option in results.sort_options -%}
+              {%- assign is_active = false -%}
+              {%- if option.value == results.sort_by -%}
+                {%- assign is_active = true -%}
+              {%- endif -%}
+              <li class="filter-item">
+                <label data-sort for="filter-{{ option.name | handleize }}" class="filter-item__content">
+                  <input
+                    type="radio"
+                    name="sort_by"
+                    {% if is_active %}checked{% endif %}
+                    value="{{ option.value }}"
+                    id="filter-{{ option.name | escape | handleize }}"
+                    class="filter-item__radio visually-hidden"
+                  />
+                  <div class="filter-input__input">
+                    <div class="indicator"></div>
+                  </div>
+                  <span class="filter-item__label">{{ option.name }}</span>
+                </label>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+        <div class="filter-drawer__footer">
+          <button class="filter-drawer__button-apply btn btn--primary btn--medium" data-button="apply">{{ 'filters.apply' | t }}</button>
+          <button class="filter-drawer__button-clear btn btn--secondary btn--medium" data-button="clear-all">{{ 'filters.clear' | t }}</button>
+        </div>
+      </div>
+    {%- endif -%}
+
+  </form>
+{%- endif -%}
+

@@ -1,0 +1,49 @@
+{%- liquid
+  unless section.settings.content_max_width == 0
+    assign content_max_width = section.settings.content_max_width | append: 'px'
+  endunless
+-%}
+<div class="page__heading__theme01">
+  <h1>{{ page.title }}</h1>
+</div>
+  <div class="page__inner livecommerce">
+    <div class="page__rte ff-body rte rte--page">
+      <div class="page__rte">
+        {{ page.content }}
+      </div>
+      {%- assign success_msg = 'general.newsletter_form.confirmation' | t -%}
+      <div class="newsletter__inner section__inner">
+        {% form 'customer', class: class, id: id %}
+          {% render 'form-status', form: form, form_id: id, success_message: success_msg %}
+
+          {%- unless form.posted_successfully? -%}
+            <div class="newsletter-form-inner">
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <label for="{{ id }}-email" class="visually-hidden">{{ 'general.newsletter_form.email_placeholder' | t }}</label>
+              <input type="email"
+                class="input"
+                name="contact[email]"
+                id="{{ id }}-email"
+                value="{% if customer.email != blank %}{{ customer.email }}{% endif %}"
+                placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                autocorrect="off"
+                autocapitalize="off"
+              >
+              <button type="submit" name="commit" id="Subscribe" class="newsletter-form__button btn btn--primary btn--small btn--medium-ns">
+                {{ 'general.newsletter_form.submit' | t }}
+              </button>
+            </div>
+          {%- endunless -%}
+        {% endform %}
+      </div>
+</div>
+</div>
+{% schema %}
+  {
+    "name": "ライブコマース開催予定",
+    "tag": "section",
+    "class": "page-section",
+    "settings": [
+    ]
+  }
+{% endschema %}

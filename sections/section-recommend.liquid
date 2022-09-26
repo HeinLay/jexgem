@@ -1,0 +1,52 @@
+<div class="sec-recommend inner">
+	<h2 class="ttl ttl-level-01 ttl-theme-01" >Recommend<span>おすすめ商品</span></h2>
+	<div class="recommend-item-layout">
+		{% for product in collections.recommend.products limit: 5 %}
+			<div class="recommend-product-item">
+				<a href="{{ product.url | within: collection }}">
+					<div class="product-img">
+						{% if product.featured_media.preview_image == null %}
+							<img
+									class="product-card__img"
+									src="{{ 'placeholder.png' | asset_img_url: 'original' }}"
+									srcset="{{ 'placeholder.png' | asset_img_url: 'original' }} "
+									alt="placeholder image"
+								/>
+						{% else %}
+							<img
+									class="product-card__img"
+									src="{{ product.featured_media.preview_image | img_url: 'original' }}"
+									srcset="{{ product.featured_media.preview_image | img_url: 'original' }}"
+									alt="{{ product.featured_media.preview_image.alt | escape }}"
+									loading="lazy"
+							/>
+						{% endif %}
+					</div>
+					<div class="product-detail">
+						<h5 class="product-recommend-field">                                                    
+							{{ product.metafields.my_fields.recommend_field | newline_to_br }}
+						</h5>
+						{% assign current_variant = product.selected_or_first_available_variant %}
+						<div class="variant-sku">No.{{ current_variant.sku }}</div>
+						<div class="product-ttl">{{product.title}}</div>
+						<div class="product-ttl">{{product.metafields.my_fields.japanese_brand}}</div>
+					</div>
+					<div class="product-price"><span class="eng-font">{{product.price | money}}</span>
+						<span>
+							{%- if shop.taxes_included -%}
+								({{ 'products.product.include_taxes' | t }})
+							{%- endif -%}
+						</span>
+					</div>
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+	<a href="/collections/recommend" class="btn btn-theme01">おすすめ商品をもっと見る</a>
+</div>
+<!-- sec-recommend -->
+{% schema %}
+{
+  "name": "おすすめ商品"
+}
+{% endschema %}

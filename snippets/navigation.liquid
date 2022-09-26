@@ -1,0 +1,79 @@
+<ul class="header__links-list fs-body-base">
+  {% for link in menu %}
+
+    {%- liquid
+      if link.links.size > 0
+        assign has_children = true
+      endif
+    -%}
+
+    <li {% if has_children %}data-submenu-parent{% endif %} class="{%- if link.links.size > 4 -%} column-count {% endif %}">
+      {%- if has_children -%}
+        {%- liquid
+          assign child_is_active = false
+          for link in link.links
+            if link.active
+              assign child_is_active = true
+              break
+            elsif link.links.size > 0
+              for link in link.links
+                if link.active
+                  assign child_is_active = true
+                  break
+                endif
+              endfor
+            endif
+          endfor
+        -%}
+
+        <button
+          type="button"
+          class="navigation__submenu-trigger no-transition{% if child_is_active %} active{% endif %} "
+          data-link
+          data-parent
+          aria-haspopup="true"
+          aria-expanded="false"
+          
+        >
+          {{ link.title }}
+          <span class="header__links-icon">
+            {% render 'icon' with icon: 'chevron' %}
+          </span>
+        </button>
+        {%- unless link.title == '店舗情報 / アクセス' -%}
+        <div class="navigation-submenu-container" data-submenu data-depth="{{ depth }}" aria-hidden="true">
+          <div class="navigation-ttl">
+            {{ link.title }}
+          </div>
+          {%- liquid
+            if has_children
+              render 'navigation-submenu' with menu: link.links, depth: 1
+            endif
+
+            assign has_children = false
+          -%}
+        </div>
+        {% endunless %}
+        {%- if link.title == '店舗情報 / アクセス' -%}
+          {%- liquid
+            if has_children
+              render 'navigation-info' with menu: link.links, depth: 1
+            endif
+
+            assign has_children = false
+          -%}
+        {% endif %}
+      {%- else -%}
+        <a
+          href="{{ link.url }}"
+          class="{% if link.active %}active{% endif %}"
+          data-link
+          {% if link.active %}aria-current="page"{% endif %}
+        >
+          {{ link.title }}
+        </a>
+      {%- endif -%}
+    </li>
+  {% endfor %}
+</ul>
+

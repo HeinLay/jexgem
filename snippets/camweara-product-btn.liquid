@@ -1,0 +1,9 @@
+<!-- Code for try on camweara starts  --> 
+{% assign pskus = "" %}
+{% assign psku1 = product.variants.first.sku %}
+{% assign pid1 = product.variants.first.id %}
+  <div id="CamWearaTryOnBtn" 
+    data-finalids="{{ pid1 }}"
+    data-finalimages="{{ psku1 }}"
+    data-pskus="{{ psku1 }}"></div>               	
+<!-- camweara Code ends -->

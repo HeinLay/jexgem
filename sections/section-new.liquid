@@ -1,0 +1,15 @@
+<div class="sec-new inner">
+	<h2 class="ttl ttl-level-01 ttl-theme-01" >New In<span>新着商品</span></h2>
+	{% assign products = collections.all.products | sort: 'created_at' | reverse %}
+	<div class="new-item-layout">
+		{% for product in products limit: 4 %}
+			{% render 'product-item' with product: product %}
+		{% endfor %}
+	</div>
+	<a href="/collections/all" class="btn btn-theme01">新着商品をもっと見る</a>
+</div>
+{% schema %}
+{
+  "name": "新着商品"
+}
+{% endschema %}

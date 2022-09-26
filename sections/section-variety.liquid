@@ -1,0 +1,50 @@
+<div class="sec-variety inner">
+	{%- for block in section.blocks -%}
+		<div class="variety" style="background: url({{ block.settings.image | img_url: '1000x' }} )no-repeat center;   background-size: cover;">
+			<div class="variety-inner">
+				{%- if block.settings.title != blank -%}
+					<h3 class="variety-ttl">{{ block.settings.title | newline_to_br }}</h3>
+        {%- endif -%} 
+				{%- if block.settings.variety-desc != blank -%}
+				<div class="variety-desc">{{ block.settings.variety-desc | newline_to_br }}</div>
+				{%- endif -%} 
+				<a href="{{ block.settings.link }}" class="read-more">Read More</a>
+			</div>
+		</div>
+	{%- endfor -%}
+</div>
+ <!-- sec-variety -->
+ {% schema %}
+{
+  "name": "JEXとは",
+  "max_blocks": 1,
+  "blocks": [
+    {
+      "type": "block",
+      "name": "JEXとはスライド",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "JEXとはタイトル"
+        },
+				{
+          "type": "textarea",
+          "id": "variety-desc",
+          "label": "JEXとは説明"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

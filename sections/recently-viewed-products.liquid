@@ -1,0 +1,47 @@
+{{ '//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' | script_tag }}
+{{ 'jquery.products.min.js' | asset_url | script_tag }}
+
+  <div class="product-recent-template section">
+    <div class="section__inner">
+      <h2 class="section__title-text">{{ section.settings.related_title | escape }}</h2>
+      <div id="recently-viewed-products" class="new-item-layout">
+      </div>
+    </div>
+  </div>
+      {% raw %}
+        <script id="recently-viewed-product-template"  type="text/x-jquery-tmpl">
+          <div class="product-item"  itemscope itemtype="http://schema.org/Product" >
+            <a href="${url}">
+              <div class="product-card__media">
+                <img class="product-card__img" src="${Shopify.Products.resizeImage(featured_image, "large")}" />
+              </div>
+              <div class="product-card__detail">
+                <div class="product-card__ttl">${title}</div>
+              </div>
+              <div class="product-card__price"><span class="eng-font">${Shopify.formatMoney(price)}</span>
+                <span>
+                  (税込)
+                </span>
+              </div>
+            </a>
+      </div>
+      </script>
+      {% endraw %}
+      <script>
+      Shopify.Products.showRecentlyViewed( { howManyToShow:4 } );
+      </script>
+	</div>
+  {% schema %}
+{
+    "name": "Product Recently Viewed",
+    "settings": [
+        {
+            "id": "related_title",
+            "type": "text",
+            "label": "Heading",
+            "default": "閲覧履歴"
+        }
+    ]
+}
+{% endschema %}
+

@@ -1,0 +1,41 @@
+<div class="sec-banner inner">
+  {%- for block in section.blocks -%}
+    {%- if block.settings.image != blank -%}
+      <a href="{{ block.settings.link }}" class="bnr-item" style="background: url({{ block.settings.image | img_url: '1000x' }} )no-repeat center;   background-size: cover;">
+        {%- if block.settings.title != blank -%}
+          <span class="bnr-txt">{{ block.settings.title }}</span>
+        {%- endif -%}
+      </a>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "バナー",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "image",
+      "name": "バナースライド",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "バナーテキスト"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

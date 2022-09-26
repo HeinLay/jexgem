@@ -1,0 +1,101 @@
+
+<div class="remote-shopping">
+  <div class="page__heading__theme01">
+    <h1>{{ page.title }} </h1>
+  </div>
+    <div class="page__inner">
+      <div class="contact__content">
+        {%- if page.content != blank -%}
+          <div class="contact__rte page__rte">
+            {{ page.content }}
+          </div>
+        {%- endif -%}
+  
+        {% form 'contact', class: 'contact__form' %}
+          {%- assign success_msg = 'contact.form.post_success' | t -%}
+          {% render 'form-status', form: form, form_id: 'contact', success_message: success_msg %}
+  
+          <label for="contact-ContactFormName" class="visually-hidden">{{ 'contact.form.name' | t }}</label>
+          <input
+            type="text"
+            name="contact[name]"
+            id="contact-ContactFormName"
+            class="input"
+            placeholder="{{ 'contact.form.name' | t }}"
+            value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}"
+          />
+  
+          <label for="contact-ContactFormEmail" class="visually-hidden">{{ 'contact.form.email' | t }}</label>
+          <input
+            type="email"
+            name="contact[email]"
+            id="contact-ContactFormEmail"
+            class="input"
+            placeholder="{{ 'contact.form.email' | t }}"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            spellcheck="false"
+            autocomplete="off"
+            autocapitalize="off"
+          >
+  
+          <label for="contact-ContactFormPhone" class="visually-hidden">{{ 'contact.form.phone' | t }}</label>
+          <input
+            type="tel"
+            name="contact[phone]"
+            id="contact-ContactFormPhone"
+            class="input-reset input w-100"
+            placeholder="{{ 'contact.form.phone' | t }}"
+            value="{% if form[phone] %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+            pattern="[0-9\-]*"
+          >
+  
+          <div class="date-blk">
+            <div><span class="s-fw-b">ご希望日時</span>【営業日12:00〜17:00】</div>
+            <a href="/pages/about/#calendar">営業日カレンダーはこちら</a>
+            <div class="choice">
+              <div class="choice-label">■ 第1希望</div>
+              <div class="input-blk">
+                <input placeholder="日付" class="date" type="text" onfocus="(this.type='date')" id="date" name="contact[date]">
+                <input placeholder="開始時間" type="text" onfocus="(this.type='time')" id="time" name="contact[time]">
+              </div>
+            </div>
+            <div class="choice">
+              <div class="choice-label">■ 第2希望</div>
+              <div class="input-blk">
+                <input placeholder="日付" class="textbox-n" type="text" onfocus="(this.type='date')" id="date" >
+                <input placeholder="開始時間" class="textbox-n" type="text" onfocus="(this.type='time')" id="time" >
+              </div>
+            </div>
+            <div class="choice">
+              <div class="choice-label">■ 第3希望</div>
+              <div class="input-blk">
+                <input placeholder="日付" class="textbox-n" type="text" onfocus="(this.type='date')" id="date" >
+                <input placeholder="開始時間" class="textbox-n" type="text" onfocus="(this.type='time')" id="time" >
+              </div>
+            </div>
+          </div>
+  
+          <label for="contact-ContactFormMessage" class="visually-hidden">{{ 'contact.form.message' | t }}</label>
+          <textarea
+            rows="10"
+            name="contact[body]"
+            id="contact-ContactFormMessage"
+            class="input-reset input w-100"
+            placeholder="リモートショッピングでご覧になりたい商品または具体的な商品番号をお知らせください"
+            required
+          >
+            {%- if form.body -%}
+              {{- form.body -}}
+            {%- endif -%}
+          </textarea>
+  
+          <p>
+            <label class="checkbox-blk"><a href="/policies/privacy-policy/">プライバシーポリシー</a>へ同意する<input type="checkbox" name="data[agree]" value="同意します" class="validate[required] agree"><span class="checkmark"></span></label>
+          </p>
+  
+          <button type="submit" class="btn btn--primary btn--form contact__form_btn">{{ 'contact.form.submit' | t }}</button>
+  
+        {% endform %}
+      </div>
+    </div>
+  </div>

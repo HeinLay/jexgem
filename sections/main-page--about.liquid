@@ -1,0 +1,384 @@
+{%- liquid
+  unless section.settings.content_max_width == 0
+    assign content_max_width = section.settings.content_max_width | append: 'px'
+  endunless
+-%}
+
+<div
+  class="page page--narrow page__about"
+  data-section-id="{{ section.id }}"
+  data-section-type="page"
+  style="--content-max-width: {{ content_max_width }};"
+>
+  {%- if section.blocks.size > 0 -%}
+    <div class="about__grid about__grid--{{ section.blocks.size }}">
+      {%- liquid
+        assign should_disable_image_style = true
+
+        if section.blocks.size == 1 and section.blocks[0].settings.video_url == blank
+          assign should_disable_image_style = false
+        endif
+      -%}
+
+      {%- for block in section.blocks -%}
+        <div class="about__block about__block--{{ forloop.index }}">
+
+          {%- if block.settings.image == blank and block.settings.video_url == blank -%}
+            <div class="placeholder-image">
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {%- endif -%}
+
+          {%- if block.settings.image != blank -%}
+            {% render 'image' with
+              image: block.settings.image,
+              disable_style: should_disable_image_style
+            %}
+          {%- endif -%}
+
+          {% if block.settings.video_url != blank %}
+            <video class="about__block-video image" autoplay playsinline loop muted src="{{ block.settings.video_url }}"></video>
+            {% render 'video-pause' %}
+          {% endif %}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  <div class="about__content">
+    <div class="jex-about-sec">
+      <div class="about-img">
+        <img
+        src="{{ 'about_img.png'  | asset_img_url: '2048x' }}"
+        srcset="{{ 'about_img.png' | asset_img_url: '2048x' }}"
+        alt="JEXジェムギャラリーについて"
+        />
+      </div>
+      <div class="jex-info">
+        <div class="heading"> 
+          <h3 class="about-heading eng-font">What’s JEX GEM GALLERY</h3>
+          <h4 class="about-sub-heading">JEXへようこそ</h4>
+        </div>
+        <div>
+          <p class="info-txt">
+            仕舞い込んだまま使わないジュエリー、でも、それを喜んで使いたい人がどこかにいる・・・、
+            その橋渡しをするのがJEXです。
+          </p>
+          <p class="info-txt">
+            JEXという店名は、“Jewelry Exchange（ジュエリーの交換）”からきています。<br>
+            売買成立後、その売却額で、新たにジュエリーをJEXでご購入されると、
+            「使わなくなったジュエリーと、使いたいジュエリーを取り換える」ことになるからです。            
+          </p>
+          <p class="info-txt">JEX仲介システムで、ジュエリーを売買する醍醐味を、是非、お楽しみください。</p>
+          <div class="info-txt s-txt-right">
+            宝石売買の仲介機関<br>
+            JEX宝石ギャラリー
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="history-sec inner">
+       <div class="history-contents">
+        <div class="heading"> 
+          <h3 class="about-heading eng-font">History of JEX</h3>
+          <h4 class="about-sub-heading">JEXの歴史</h4>
+        </div>
+        <div class="history-info">
+          <div class="history-txt">
+            <p>
+              「宝石は買うときは高く、実際に売る時には驚くほど安ってしまう」…この現実をなんとか改善できないものかと思いめぐらしていたのが創設者の藤本登志雄でした。「宝石売買の仲介市場」を作ろう」…そしてこれが、彼が見出だした解決策でした。
+            </p>
+          </div>
+          <div class="history-txt">
+            <p>その実現のため、試行錯誤の末、売買が成立した時に、ご出品者とご購入者の双方から仲介料を頂くアイデアに至りました。
+            </p>
+            <p>このようにして、単に新しい持ち主の方との出会いの場を提供するのみならず、「買うときと換金する時の価格差をできる限り小さくする」ということをも可能にする、<a href="http://www.gem.co.jp/selling/index.html" target="_blank" rel="noopener noreferrer" class="txt-decoration">JEXの宝石仲介システム</a>ができました。
+            </p>
+            <p>
+              1990年に、日本初の本格的宝石売買の仲介市場として大阪駅前店を開設、その後、2000年には東京銀座店を開設しました。
+            </p>
+          </div>
+          <div class="history-txt">
+            <p>藤本登志雄の目指したものは、「善の渦巻の拡大」です。JEX創設以来、このJEXの宝石仲介システムは多くの方から歓迎され、時には海外からのご利用も頂き、喜びの渦が確実に広がってきていることを実感しています。</p>
+          </div>
+        </div>
+      </div>
+      <div class="history-img-blk">
+        <div class="history-img">
+          <img
+          src="{{ 'history_img01.png' | asset_img_url: 'original' }}"
+          srcset="{{ 'history_img01.png' | asset_img_url: 'original' }} "
+          alt="JEXの歴史"
+        />
+        </div>
+        <div class="history-img">
+          <img
+
+          src="{{ 'history_img02.png' | asset_img_url: 'original' }}"
+          srcset="{{ 'history_img02.png' | asset_img_url: 'original' }} "
+          alt="history image"
+        />
+        </div>
+      </div>
+    </div>
+    <div class="points-sec" id="points">
+      <div class="heading"> 
+        <h3 class="about-heading eng-font">Point</h3>
+        <h4 class="about-sub-heading">JEXジェムギャラリーで購入時の嬉しいポイント</h4>
+      </div>
+      <div class="point-blk">
+        <div class="point-item item01">
+          <div class="point-img">
+            <img
+  
+            src="{{ 'point_img01.png' | asset_img_url: 'original' }}"
+            srcset="{{ 'point_img01.png' | asset_img_url: 'original' }} "
+            alt="鑑定・鑑別書について"
+          />
+          </div>
+          <div class="point-no eng-font">
+            01
+          </div>
+          <div class="point-ttl">
+            鑑定・鑑別書に<br>
+            ついて
+          </div>
+          <div class="point-txt">
+            ￥121,000以上(税込)の<br>
+            お品物については鑑定<br>
+            鑑別書を作成しております
+          </div>
+        </div>
+        <div class="point-item item02">
+          <div class="point-img">
+            <img
+  
+            src="{{ 'point_img02.png' | asset_img_url: 'original' }}"
+            srcset="{{ 'point_img02.png' | asset_img_url: 'original' }} "
+            alt="洗浄・点検について"
+          />
+          </div>
+          <div class="point-no eng-font">
+            02
+          </div>
+          <div class="point-ttl">
+            洗浄・点検に<br>
+            ついて
+          </div>
+          <div class="point-txt">
+            購入後も、店舗にて<br>
+            洗浄・点検サービスを<br>
+            おこなっております
+          </div>
+        </div>
+        <div class="point-item item03">
+          <div class="point-img">
+            <img
+  
+            src="{{ 'point_img03.png' | asset_img_url: 'original' }}"
+            srcset="{{ 'point_img03.png' | asset_img_url: 'original' }} "
+            alt="パールネックレスの糸替え"
+          />
+          </div>
+          <div class="point-no eng-font">
+            03
+          </div>
+          <div class="point-ttl">
+            パールネックレスの<br>
+            糸替え
+          </div>
+          <div class="point-txt">
+            ご購入時に点検をし<br>
+            必要な場合は糸替えをして納品いたします
+          </div>
+        </div>
+        <div class="point-item item04">
+          <div class="point-img">
+            <img
+  
+            src="{{ 'point_img04.png' | asset_img_url: 'original' }}"
+            srcset="{{ 'point_img04.png' | asset_img_url: 'original' }} "
+            alt="時計のメンテナンス"
+          />
+          </div>
+          <div class="point-no eng-font">
+            04
+          </div>
+          <div class="point-ttl">
+            時計の<br>
+            メンテナンス
+          </div>
+          <div class="point-txt">
+            ご購入時にメンテナンスをおこない、保障をつけてお渡しとなります
+          </div>
+        </div>
+        <div class="point-item item05">
+          <div class="point-img">
+            <img
+            src="{{ 'point_img05.png' | asset_img_url: 'original' }}"
+            srcset="{{ 'point_img05.png' | asset_img_url: 'original' }} "
+            alt="サイズ直し他ご要望承ります"
+          />
+          </div>
+          <div class="point-no eng-font">
+            05
+          </div>
+          <div class="point-ttl">
+            サイズ直し<br>
+            他ご要望承ります
+          </div>
+          <div class="point-txt">
+            イヤリング⇔ピアスの変更や、長さ調節などのリフォームが可能
+          </div>
+          <div class="point-label">
+            有料
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="company-sec inner" id="company-outline">
+      <div class="company-outline">
+        <div class="heading"> 
+          <h3 class="about-heading eng-font">Company Outline</h3>
+          <h4 class="about-sub-heading">会社概要</h4>
+        </div>
+        <div id="calendar"></div>
+        <!-- <iframe src="https://calendar.google.com/calendar/embed?src=8gtgefjtuj9hdn1akgli9lr86s%40group.calendar.google.com&ctz=Asia%2FYangon" style="border: 0" width="240" height="300" frameborder="0" scrolling="no"></iframe>
+        <ul class="calendar-notices"> -->
+          <li class="d-flex">
+            <span class="mark mark01"></span>
+            今日
+          </li>
+          <li class="d-flex">
+            <span class="mark mark02"></span>
+            定休日
+          </li>
+          <li class="d-flex">
+            <span class="mark mark03"></span>
+            11:00～16:00
+          </li>
+          <li>
+            営業時間　11:00～18:30
+          </li>
+          <li>
+            (金曜日は11:00～16:00)
+          </li>
+          <li>
+            定休日　毎週土曜日/祝日
+          </li>
+        </ul> 
+        <div class="calendar__info__txt">
+          ご来店の際は事前にご予約ください
+        </div>
+      </div>
+      <div class="company-info">
+        <dl>
+          <dt>社名</dt>
+          <dd>株式会社エヌ・ディー・シー</dd>
+        </dl>
+        <dl>
+          <dt>代表取締役</dt>
+          <dd>藤本伸子</dd>
+        </dl>
+        <dl>
+          <dt>設立</dt>
+          <dd>1974年3月</dd>
+        </dl>
+        <dl>
+          <dt>事業内容</dt>
+          <dd>宝石輸入・卸・仲介・宝石専門学校</dd>
+        </dl>
+        <dl class="s-mb-30">
+          <dt>免許・資格</dt>
+          <dd>第621110700740号/大阪府公安委員会 古物商許可証
+          </dd>
+        </dl>
+        <dl class="s-mb-30">
+          <dt>
+            JEX東京銀座店
+          </dt>
+          <dd>
+            〒104-0061 東京都中央区銀座5丁目4-7 ヒューリック銀座五丁目並木通ビル7F<br>
+            フリーダイヤル：0120-53-5537　TEL：03-5537-5557　FAX：03-5537-5558<br>
+            営業時間：11:00〜18:30 (金曜日は11:00 から 16:00)<br>
+            定休日：土曜日、祝・祭日(日曜日営業)
+          </dd>
+        </dl>
+        <dl>
+          <dt>JEX大阪駅前店</dt>
+          <dd>
+            〒530-0001 大阪市北区梅田1丁目2-2-100 大阪駅前第2ビル南側1階<br>
+            フリーダイヤル：0120-00-8189　TEL：06-6342-0001　FAX：06-6341-1889<br>
+            営業時間：11:00〜18:30 (金曜日は11:00 から 16:00)<br>
+            定休日：土曜日、祝・祭日(日曜日営業)
+          </dd>
+        </dl>
+        <dl>
+          <dt>
+            本社
+          </dt>
+          <dd>
+            〒542-0081 大阪府大阪市中央区南船場3-2-1 日本ジェムセンタービル<br>
+            TEL：06-6244-1821　FAX：06-6243-1233<br>
+            営業時間： 10:00〜18:00<br>
+            定休日：日曜日、祝・祭日（第1・第3土曜日は休業）
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  {% if page.template_suffix == 'About' %}
+    body {
+      background: #fff;
+    }
+    #main {
+      background: #fff;
+    }
+  {% endif %}
+</style>
+{% schema %}
+  {
+    "name": "t:sections.main_page_about.name",
+    "tag": "section",
+    "class": "page-section",
+    "settings": [
+      {
+        "id": "intro",
+        "type": "textarea",
+        "label": "t:sections.main_page_about.settings.intro.label"
+      },
+      {
+        "id": "content_max_width",
+        "type": "range",
+        "min": 400,
+        "max": 2000,
+        "step": 100,
+        "default": 700,
+        "label": "t:sections.main_page_about.settings.content_max_width.label",
+        "info": "t:sections.main_page_about.settings.content_max_width.info"
+      }
+    ],
+    "max_blocks": 5,
+    "blocks": [
+      {
+        "type": "media",
+        "name": "t:sections.main_page_about.blocks.media.name",
+        "settings": [
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "t:sections.main_page_about.blocks.media.settings.image.label"
+          },
+          {
+            "type": "url",
+            "id": "video_url",
+            "label": "t:sections.main_page_about.blocks.media.settings.video_url.label",
+            "info": "t:sections.main_page_about.blocks.media.settings.video_url.info"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
