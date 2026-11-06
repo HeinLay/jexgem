@@ -25,7 +25,7 @@
             height="{{ 120 | divided_by: product.featured_media.preview_image.aspect_ratio }}"
           >
         {%- else -%}
-          {% render 'icon' with icon: 'abc' %}
+          {% render 'icon' with icon, icon: 'abc' %}
         {%- endif -%}
       </div>
       <div class="quick-search__result-details ff-body fs-body-small">
@@ -76,7 +76,7 @@
     {%- endif -%}
     <a class="quick-search__result" href="{{ page.url }}">
       <div class="quick-search__result-image">
-        {% render 'icon' with icon: 'abc' %}
+        {% render 'icon' with icon, icon: 'abc' %}
       </div>
       <div class="quick-search__result-details ff-body fs-body-small">
         <div class="quick-search__result-heading">{{ page.title }}</div>
@@ -98,7 +98,7 @@
             height="{{ 120 | divided_by: article.image.preview_image.aspect_ratio }}"
           >
         {%- else -%}
-          {% render 'icon' with icon: 'abc' %}
+          {% render 'icon' with icon, icon: 'abc' %}
         {%- endif -%}
       </div>
       <div class="quick-search__result-details ff-body fs-body-small">
@@ -116,3 +116,19 @@
   </div>
   {%- endif -%}
 {%- endif -%}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon' with icon: 'abc' %}"
+  to: "{% render 'icon' with icon, icon: 'abc' %}"
+  position: 1056..1098
+- from: "{% render 'icon' with icon: 'abc' %}"
+  to: "{% render 'icon' with icon, icon: 'abc' %}"
+  position: 3318..3360
+- from: "{% render 'icon' with icon: 'abc' %}"
+  to: "{% render 'icon' with icon, icon: 'abc' %}"
+  position: 4192..4234
+{% endcomment %}

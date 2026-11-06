@@ -359,24 +359,10 @@
       	{%- elsif product.featured_media -%}
         <a class="product-item__image-link" href="{{ product.url }}" aria-label="{{ product.title }}">
           {%- if multiple_images -%}
-            {% render 'image' with
-              id: product.media[0].id,
-              image: product.media[0].preview_image,
-              wrapper_class: 'product-item__image product-item__image--one',
-              disable_style: includes_aspect_ratio
-            %}
-            {% render 'image' with
-              image: product.media[1].preview_image,
-              wrapper_class: 'product-item__image product-item__image--two',
-              disable_style: includes_aspect_ratio
-            %}
+            {% render 'image' with id, id: product.media[0].id, image: product.media[0].preview_image, wrapper_class: 'product-item__image product-item__image--one', disable_style: includes_aspect_ratio %}
+            {% render 'image' with image, image: product.media[1].preview_image, wrapper_class: 'product-item__image product-item__image--two', disable_style: includes_aspect_ratio %}
           {%- else -%}
-            {% render 'image' with
-              id: product.featured_media.id,
-              image: product.featured_media,
-              wrapper_class: 'product-item__image',
-              disable_style: includes_aspect_ratio
-            %}
+            {% render 'image' with id, id: product.featured_media.id, image: product.featured_media, wrapper_class: 'product-item__image', disable_style: includes_aspect_ratio %}
           {%- endif -%}
           <!-- sale_badge_includes_percent -->
           <div class="noti__slide">
@@ -425,7 +411,7 @@
         {%- endunless -%}
 
         {%- if settings.enable_card_hover_options -%}
-          {%- render 'product-item-options' with product: product, product_columns: product_columns -%}
+          {%- render 'product-item-options' with product, product: product, product_columns: product_columns -%}
         {%- endif -%}
       	{%- endif -%}
     	</div>
@@ -506,4 +492,46 @@
 			</div>
 			</div>
 		</div>
-</div>
+</div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'image' with
+                  id: product.media[0].id,
+                  image: product.media[0].preview_image,
+                  wrapper_class: 'product-item__image product-item__image--one',
+                  disable_style: includes_aspect_ratio
+                %}
+  to: "{% render 'image' with id, id: product.media[0].id, image: product.media[0].preview_image,
+    wrapper_class: 'product-item__image product-item__image--one', disable_style:
+    includes_aspect_ratio %}"
+  position: 15160..15353
+- from: |-
+    {% render 'image' with
+                  image: product.media[1].preview_image,
+                  wrapper_class: 'product-item__image product-item__image--two',
+                  disable_style: includes_aspect_ratio
+                %}
+  to: "{% render 'image' with image, image: product.media[1].preview_image, wrapper_class:
+    'product-item__image product-item__image--two', disable_style: includes_aspect_ratio
+    %}"
+  position: 15366..15537
+- from: |-
+    {% render 'image' with
+                  id: product.featured_media.id,
+                  image: product.featured_media,
+                  wrapper_class: 'product-item__image',
+                  disable_style: includes_aspect_ratio
+                %}
+  to: "{% render 'image' with id, id: product.featured_media.id, image: product.featured_media,
+    wrapper_class: 'product-item__image', disable_style: includes_aspect_ratio %}"
+  position: 15573..15739
+- from: "{%- render 'product-item-options' with product: product, product_columns:
+    product_columns -%}"
+  to: "{%- render 'product-item-options' with product, product: product, product_columns:
+    product_columns -%}"
+  position: 18229..18331
+{%- endcomment -%}

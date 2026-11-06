@@ -40,11 +40,11 @@
       {% endif %}
     >
       {%- if logo != blank -%}
-        {%- render 'image' with image: logo, wrapper_class: 'regular-logo', preload: true -%}
+        {%- render 'image' with image, image: logo, wrapper_class: 'regular-logo', preload: true -%}
       {%- endif -%}
 
       {%- if logo_transparent != blank -%}
-        {%- render 'image' with image: logo_transparent, wrapper_class: 'transparent-logo', preload: true -%}
+        {%- render 'image' with image, image: logo_transparent, wrapper_class: 'transparent-logo', preload: true -%}
       {%- endif -%}
 
       {%- if logo == blank or logo_transparent == blank -%}
@@ -61,7 +61,7 @@
     data-search
     aria-label="{{ 'general.accessibility.open_search' | t }}"
   >
-    {% render 'icon-button' with icon: 'search' %}
+    {% render 'icon-button' with icon, icon: 'search' %}
   </a>
 {%- endcapture -%}
 
@@ -81,7 +81,7 @@
     href="{{ routes.account_url }}"
     aria-label="{{ 'general.accessibility.go_account' | t }}"
     >
-    {% render 'icon-button' with icon: 'account' %}
+    {% render 'icon-button' with icon, icon: 'account' %}
   </a>
 {%- endcapture -%}
 
@@ -106,16 +106,16 @@
 {%- capture nav -%}
   <nav class="header__links" data-navigation>
     {%- if menu == blank and secondary_menu != blank -%}
-      {% render 'navigation' with menu: secondary_links %}
+      {% render 'navigation' with menu, menu: secondary_links %}
     {%- else -%}
-      {% render 'navigation' with menu: links %}
+      {% render 'navigation' with menu, menu: links %}
     {%- endif -%}
   </nav>
 {%- endcapture -%}
 
 {%- capture burger -%}
   <button class="header__menu-icon header__icon-touch header__icon-menu" aria-label="{{ 'general.accessibility.open_menu' | t }}" data-js-menu-button>
-    {% render 'icon-button' with icon: 'menu' %}
+    {% render 'icon-button' with icon, icon: 'menu' %}
   </button>
 {%- endcapture -%}
 
@@ -239,10 +239,10 @@
   </div>
 
   <div class="no-js-menu no-js-menu--desktop">
-    {% render 'no-js-navmenu' with menu: menu, secondary_menu: secondary_menu %}
+    {% render 'no-js-navmenu' with menu, menu: menu, secondary_menu: secondary_menu %}
   </div>
 
-  {% render 'drawer-menu' with menu: menu, secondary_menu: secondary_menu %}
+  {% render 'drawer-menu' with menu, menu: menu, secondary_menu: secondary_menu %}
 </header>
 
 <script>
@@ -363,4 +363,44 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'image' with image: logo, wrapper_class: 'regular-logo', preload:
+    true -%}"
+  to: "{%- render 'image' with image, image: logo, wrapper_class: 'regular-logo',
+    preload: true -%}"
+  position: 1493..1585
+- from: "{%- render 'image' with image: logo_transparent, wrapper_class: 'transparent-logo',
+    preload: true -%}"
+  to: "{%- render 'image' with image, image: logo_transparent, wrapper_class: 'transparent-logo',
+    preload: true -%}"
+  position: 1658..1766
+- from: "{% render 'icon-button' with icon: 'search' %}"
+  to: "{% render 'icon-button' with icon, icon: 'search' %}"
+  position: 2195..2247
+- from: "{% render 'icon-button' with icon: 'account' %}"
+  to: "{% render 'icon-button' with icon, icon: 'account' %}"
+  position: 2810..2863
+- from: "{% render 'navigation' with menu: secondary_links %}"
+  to: "{% render 'navigation' with menu, menu: secondary_links %}"
+  position: 3542..3600
+- from: "{% render 'navigation' with menu: links %}"
+  to: "{% render 'navigation' with menu, menu: links %}"
+  position: 3624..3672
+- from: "{% render 'icon-button' with icon: 'menu' %}"
+  to: "{% render 'icon-button' with icon, icon: 'menu' %}"
+  position: 3898..3948
+- from: "{% render 'no-js-navmenu' with menu: menu, secondary_menu: secondary_menu
+    %}"
+  to: "{% render 'no-js-navmenu' with menu, menu: menu, secondary_menu: secondary_menu
+    %}"
+  position: 7849..7931
+- from: "{% render 'drawer-menu' with menu: menu, secondary_menu: secondary_menu %}"
+  to: "{% render 'drawer-menu' with menu, menu: menu, secondary_menu: secondary_menu
+    %}"
+  position: 7944..8024
+{%- endcomment -%}
