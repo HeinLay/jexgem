@@ -59,19 +59,11 @@
 >
   <div class="slideshow__asset">
     {%- if desktop_image != blank -%}
-      {% render 'image' with
-        image: desktop_image,
-        wrapper_class: 'slideshow__image-wrapper slideshow__image--desktop',
-        disable_style: disable_style
-      %}
+      {% render 'image' with image, image: desktop_image, wrapper_class: 'slideshow__image-wrapper slideshow__image--desktop', disable_style: disable_style %}
     {%- endif -%}
 
     {%- if mobile_image != blank -%}
-      {% render 'image' with
-        image: mobile_image,
-        wrapper_class: 'slideshow__image-wrapper slideshow__image--mobile',
-        disable_style: disable_style
-      %}
+      {% render 'image' with image, image: mobile_image, wrapper_class: 'slideshow__image-wrapper slideshow__image--mobile', disable_style: disable_style %}
     {%- endif -%}
 
     {%- if desktop_image == blank -%}
@@ -119,4 +111,28 @@
       {%- endif -%}
     </div>
   </div>
-</div>
+</div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'image' with
+            image: desktop_image,
+            wrapper_class: 'slideshow__image-wrapper slideshow__image--desktop',
+            disable_style: disable_style
+          %}
+  to: "{% render 'image' with image, image: desktop_image, wrapper_class: 'slideshow__image-wrapper
+    slideshow__image--desktop', disable_style: disable_style %}"
+  position: 2226..2378
+- from: |-
+    {% render 'image' with
+            image: mobile_image,
+            wrapper_class: 'slideshow__image-wrapper slideshow__image--mobile',
+            disable_style: disable_style
+          %}
+  to: "{% render 'image' with image, image: mobile_image, wrapper_class: 'slideshow__image-wrapper
+    slideshow__image--mobile', disable_style: disable_style %}"
+  position: 2441..2591
+{%- endcomment -%}

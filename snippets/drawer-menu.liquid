@@ -45,7 +45,7 @@
         class="drawer-menu__close-icon"
         aria-label="{{ 'general.accessibility.close_modal' | t }}"
       >
-        {% render 'icon-button' with icon: 'close-stroke' %}
+        {% render 'icon-button' with icon, icon: 'close-stroke' %}
       </button>
     </div>
 
@@ -77,7 +77,7 @@
                   aria-expanded="false"
                 >
                   {{ 'sections.drawer_menu.search_title' | t }}
-                  {% render 'icon' with icon: 'arrow-stroke', class: 'menu-icon' %}
+                  {% render 'icon' with icon, icon: 'arrow-stroke', class: 'menu-icon' %}
                 </a>
                 <ul class="drawer-menu__list drawer-menu__list--sub" data-search-menu aria-hidden="true">
                   <li class="drawer-menu__item drawer-menu__item--heading">
@@ -85,7 +85,7 @@
                       <span class="ff-heading fs-heading-2-base fs-heading-2-large-ns">
                         {{ 'sections.drawer_menu.search_title' | t }}
                       </span>
-                      {% render 'icon' with icon: 'arrow-stroke', class: 'menu-icon' %}
+                      {% render 'icon' with icon, icon: 'arrow-stroke', class: 'menu-icon' %}
                     </button>
                   </li>
                   <li class="drawer-menu__search">
@@ -107,7 +107,7 @@
                               data-search-clear
                               aria-label="{{ 'search.clear_search' | t }}"
                             >
-                              {% render 'icon' with icon: 'close-stroke' %}
+                              {% render 'icon' with icon, icon: 'close-stroke' %}
                             </button>
                             <button
                               class="drawer-menu__submit"
@@ -115,7 +115,7 @@
                               data-search-submit
                               aria-label="{{ 'search.search' | t }}"
                             >
-                              {% render 'icon' with icon: 'arrow-stroke' %}
+                              {% render 'icon' with icon, icon: 'arrow-stroke' %}
                             </button>
                           </div>
                         </div>
@@ -150,7 +150,7 @@
                         aria-expanded="false"
                       >
                         {{ 'sections.drawer_menu.language' | t }}
-                        {% render 'icon' with icon: 'arrow-stroke', class: 'menu-icon' %}
+                        {% render 'icon' with icon, icon: 'arrow-stroke', class: 'menu-icon' %}
                       </a>
                       <ul class="drawer-menu__list drawer-menu__list--sub" aria-hidden="true">
                         <li class="drawer-menu__item drawer-menu__item--heading">
@@ -158,7 +158,7 @@
                             <span class="ff-heading fs-heading-2-base fs-heading-2-large-ns">
                               {{ 'sections.drawer_menu.language' | t }}
                             </span>
-                            {% render 'icon' with icon: 'arrow-stroke', class: 'menu-icon' %}
+                            {% render 'icon' with icon, icon: 'arrow-stroke', class: 'menu-icon' %}
                           </button>
                         </li>
                         {% for locale in form.available_locales %}
@@ -184,7 +184,7 @@
                         aria-expanded="false"
                       >
                         {{ 'sections.drawer_menu.currency' | t }}
-                        {% render 'icon' with icon: 'arrow-stroke', class: 'menu-icon' %}
+                        {% render 'icon' with icon, icon: 'arrow-stroke', class: 'menu-icon' %}
                       </a>
                       <ul class="drawer-menu__list drawer-menu__list--sub" aria-hidden="true">
                         <li class="drawer-menu__item drawer-menu__item--heading">
@@ -192,7 +192,7 @@
                             <span class="ff-heading fs-heading-2-base fs-heading-2-large-ns">
                               {{ 'sections.drawer_menu.currency' | t }}
                             </span>
-                            {% render 'icon' with icon: 'arrow-stroke', class: 'menu-icon' %}
+                            {% render 'icon' with icon, icon: 'arrow-stroke', class: 'menu-icon' %}
                           </button>
                         </li>
                         {% for country in localization.available_countries %}
@@ -219,3 +219,37 @@
     </div>
   </div>
 </div>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-button' with icon: 'close-stroke' %}"
+  to: "{% render 'icon-button' with icon, icon: 'close-stroke' %}"
+  position: 1196..1254
+- from: "{% render 'icon' with icon: 'arrow-stroke', class: 'menu-icon' %}"
+  to: "{% render 'icon' with icon, icon: 'arrow-stroke', class: 'menu-icon' %}"
+  position: 2779..2850
+- from: "{% render 'icon' with icon: 'arrow-stroke', class: 'menu-icon' %}"
+  to: "{% render 'icon' with icon, icon: 'arrow-stroke', class: 'menu-icon' %}"
+  position: 3336..3407
+- from: "{% render 'icon' with icon: 'close-stroke' %}"
+  to: "{% render 'icon' with icon, icon: 'close-stroke' %}"
+  position: 4567..4618
+- from: "{% render 'icon' with icon: 'arrow-stroke' %}"
+  to: "{% render 'icon' with icon, icon: 'arrow-stroke' %}"
+  position: 4973..5024
+- from: "{% render 'icon' with icon: 'arrow-stroke', class: 'menu-icon' %}"
+  to: "{% render 'icon' with icon, icon: 'arrow-stroke', class: 'menu-icon' %}"
+  position: 6536..6607
+- from: "{% render 'icon' with icon: 'arrow-stroke', class: 'menu-icon' %}"
+  to: "{% render 'icon' with icon, icon: 'arrow-stroke', class: 'menu-icon' %}"
+  position: 7120..7191
+- from: "{% render 'icon' with icon: 'arrow-stroke', class: 'menu-icon' %}"
+  to: "{% render 'icon' with icon, icon: 'arrow-stroke', class: 'menu-icon' %}"
+  position: 8591..8662
+- from: "{% render 'icon' with icon: 'arrow-stroke', class: 'menu-icon' %}"
+  to: "{% render 'icon' with icon, icon: 'arrow-stroke', class: 'menu-icon' %}"
+  position: 9205..9276
+{% endcomment %}

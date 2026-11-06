@@ -28,13 +28,7 @@
 
     <div class="testimonials__grid">
       {%- for block in section.blocks -%}
-        {%- render 'testimonials-item' with
-          columns: section.settings.columns,
-          heading: block.settings.heading,
-          testimonial: block.settings.testimonial,
-          author: block.settings.author,
-          text_max_width: block.settings.text_max_width,
-        -%}
+        {%- render 'testimonials-item' with columns, columns: section.settings.columns, heading: block.settings.heading, testimonial: block.settings.testimonial, author: block.settings.author, text_max_width: block.settings.text_max_width -%}
       {%- endfor -%}
     </div>
   </div>
@@ -141,4 +135,22 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%- render 'testimonials-item' with
+              columns: section.settings.columns,
+              heading: block.settings.heading,
+              testimonial: block.settings.testimonial,
+              author: block.settings.author,
+              text_max_width: block.settings.text_max_width,
+            -%}
+  to: "{%- render 'testimonials-item' with columns, columns: section.settings.columns,
+    heading: block.settings.heading, testimonial: block.settings.testimonial, author:
+    block.settings.author, text_max_width: block.settings.text_max_width -%}"
+  position: 807..1041
+{%- endcomment -%}

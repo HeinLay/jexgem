@@ -1,4 +1,4 @@
-{% capture "form_classes" -%}
+{% capture form_classes -%}
   product-form product-form-{{ section.id }}
 {%- endcapture %}
 
@@ -91,7 +91,7 @@
         <div class="btn__loading-wrap">
           <div class="btn__loading-bar"></div>
         </div>
-        {% render 'icon' with icon: 'check' %}
+        {% render 'icon' with icon, icon: 'check' %}
       </button>
 
       <div class="product-form__shop-pay fs-body-small">
@@ -102,4 +102,16 @@
       <div class="store-availability-container__wrapper" data-store-availability-container data-base-url="{{ shop.url }}{{ routes.root_url }}"></div>
     </div>
   </div>
-{%- endform -%}
+{%- endform -%}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% capture "form_classes" -%}'
+  to: "{% capture form_classes -%}"
+  position: 0..27
+- from: "{% render 'icon' with icon: 'check' %}"
+  to: "{% render 'icon' with icon, icon: 'check' %}"
+  position: 3844..3888
+{%- endcomment -%}

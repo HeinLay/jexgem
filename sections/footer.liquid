@@ -150,7 +150,7 @@
                           autocapitalize="off"
                         >
                         <button type="submit" name="commit" id="Subscribe-footer" class="footer__newsletter-button" aria-label="{{ 'general.newsletter_form.submit' | t }}">
-                          {%- render 'icon' with icon: 'arrow-circle' -%}
+                          {%- render 'icon' with icon, icon: 'arrow-circle' -%}
                         </button>
                       </div>
                     {%- endunless -%}
@@ -310,3 +310,13 @@
     }
   }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'icon' with icon: 'arrow-circle' -%}"
+  to: "{%- render 'icon' with icon, icon: 'arrow-circle' -%}"
+  position: 6023..6076
+{% endcomment %}

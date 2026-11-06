@@ -36,18 +36,10 @@
         <div class="collection__container">
           <div class="collection__content">
             <div class="collection__filters" data-filter-bar>
-              {% render 'mobile-filters' with
-              results: collection,
-                show_sort: section.settings.show_sort,
-                show_filters: section.settings.show_filters
-              %}
+              {% render 'mobile-filters' with results, results: collection, show_sort: section.settings.show_sort, show_filters: section.settings.show_filters %}
             </div>
             <div class="collection__main__content">
-              {% render 'filter-bar' with
-                  results: collection,
-                  show_sort: section.settings.show_sort,
-                  show_filters: section.settings.show_filters
-                %}
+              {% render 'filter-bar' with results, results: collection, show_sort: section.settings.show_sort, show_filters: section.settings.show_filters %}
 
               <div class="collection__main-area">
                 <div class="collection__window">
@@ -57,16 +49,11 @@
 
                   <div id="root" data-partial>
                     <div class="collection__active-filters-container">
-                      {%- render 'active-filters' with results: collection -%}
+                      {%- render 'active-filters' with results, results: collection -%}
                     </div>
                     <div data-section-id="{% if section.id %}{{section.id}}{% endif %}" data-sectionId="{% if section.id %}{{section.id}}{% endif %}" {% if section.blocks %}data-blocks='{ {%- capture blocks_json -%}{% for block in section.blocks %}{%- capture block_json -%}"{{ block.type }}":{{ block.settings | json }}{%- endcapture -%}{{ block_json | prepend: ","  }}{% endfor %}{%- endcapture -%}{{ blocks_json | remove_first: "," }} }' {% endif %} data-settings='{% if section.settings %}{{section.settings | json}}{% endif %}' id="gf-products" class="collection__products collection__infinite-container">
                       {% for product in collection.products %}
-                        {% render 'product-item' with
-                          product: product,
-                          aspect_ratio: section.settings.aspect_ratio,
-                          product_columns: section.settings.columns,
-                          product_columns_mobile: section.settings.columns_mobile
-                        %}
+                        {% render 'product-item' with product, product: product, aspect_ratio: section.settings.aspect_ratio, product_columns: section.settings.columns, product_columns_mobile: section.settings.columns_mobile %}
                       {% else %}
                         <div class="collection__empty">
                           <div>{{ 'collections.general.no_products' | t }}</div>
@@ -86,16 +73,9 @@
                     {% if paginated %}
                       <div>
                         {% if paginate.pages > 1 %}
-                          {% render 'pagination' with
-                            paginate: paginate,
-                            type: 'general.pagination.products'
-                          %}
+                          {% render 'pagination' with paginate, paginate: paginate, type: 'general.pagination.products' %}
                         {% else %}
-                          {% render 'pagination' with
-                            paginate: paginate,
-                            type: 'general.pagination.products',
-                            display_paginate_item_count_only: true
-                          %}
+                          {% render 'pagination' with paginate, paginate: paginate, type: 'general.pagination.products', display_paginate_item_count_only: true %}
                         {% endif %}
                       </div>
                     {% endif %}
@@ -210,4 +190,59 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'mobile-filters' with
+                  results: collection,
+                    show_sort: section.settings.show_sort,
+                    show_filters: section.settings.show_filters
+                  %}
+  to: "{% render 'mobile-filters' with results, results: collection, show_sort: section.settings.show_sort,
+    show_filters: section.settings.show_filters %}"
+  position: 1276..1423
+- from: |-
+    {% render 'filter-bar' with
+                      results: collection,
+                      show_sort: section.settings.show_sort,
+                      show_filters: section.settings.show_filters
+                    %}
+  to: "{% render 'filter-bar' with results, results: collection, show_sort: section.settings.show_sort,
+    show_filters: section.settings.show_filters %}"
+  position: 1509..1652
+- from: "{%- render 'active-filters' with results: collection -%}"
+  to: "{%- render 'active-filters' with results, results: collection -%}"
+  position: 2026..2091
+- from: |-
+    {% render 'product-item' with
+                              product: product,
+                              aspect_ratio: section.settings.aspect_ratio,
+                              product_columns: section.settings.columns,
+                              product_columns_mobile: section.settings.columns_mobile
+                            %}
+  to: "{% render 'product-item' with product, product: product, aspect_ratio: section.settings.aspect_ratio,
+    product_columns: section.settings.columns, product_columns_mobile: section.settings.columns_mobile
+    %}"
+  position: 2817..3020
+- from: |-
+    {% render 'pagination' with
+                                paginate: paginate,
+                                type: 'general.pagination.products'
+                              %}
+  to: "{% render 'pagination' with paginate, paginate: paginate, type: 'general.pagination.products'
+    %}"
+  position: 3981..4077
+- from: |-
+    {% render 'pagination' with
+                                paginate: paginate,
+                                type: 'general.pagination.products',
+                                display_paginate_item_count_only: true
+                              %}
+  to: "{% render 'pagination' with paginate, paginate: paginate, type: 'general.pagination.products',
+    display_paginate_item_count_only: true %}"
+  position: 4139..4275
+{%- endcomment -%}

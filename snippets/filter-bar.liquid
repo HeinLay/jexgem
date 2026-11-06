@@ -30,7 +30,7 @@
         aria-hidden="true"
       >
         <button type="button" class="filter-drawer__close" aria-label="{{ 'general.accessibility.close_modal' | t }}" data-close-icon>
-          {% render 'icon-button' with icon: 'close-stroke' %}
+          {% render 'icon-button' with icon, icon: 'close-stroke' %}
         </button>
 
         <div class="filter-drawer__content" data-scroll-lock-ignore>
@@ -69,23 +69,11 @@
                       -%}
 
                       {%- if swatch_options contains group_name -%}
-                        {% render 'filter-item' with
-                          type: 'swatch',
-                          forloop: forloop,
-                          filter_value: filter_value
-                        %}
+                        {% render 'filter-item' with type, type: 'swatch', forloop: forloop, filter_value: filter_value %}
                       {%- elsif chip_options contains group_name -%}
-                        {% render 'filter-item' with
-                          type: 'chip',
-                          forloop: forloop,
-                          filter_value: filter_value
-                        %}
+                        {% render 'filter-item' with type, type: 'chip', forloop: forloop, filter_value: filter_value %}
                       {%- else -%}
-                        {% render 'filter-item' with
-                          type: 'checkbox',
-                          forloop: forloop,
-                          filter_value: filter_value
-                        %}
+                        {% render 'filter-item' with type, type: 'checkbox', forloop: forloop, filter_value: filter_value %}
                       {%- endif -%}
                     {%- endfor -%}
                   </ul>
@@ -155,7 +143,7 @@
         <button type="button" class="filter-bar__button filter-bar__button-dropdown" data-filter-target="__sort" data-sort-dropdown>
           {{ 'filters.sort_title' | t }}
           <span class="filter-bar__icon">
-            {% render 'icon' with icon: 'triangle' %}
+            {% render 'icon' with icon, icon: 'triangle' %}
           </span>
         </button>
       </div>
@@ -170,7 +158,7 @@
   >
 
     <button type="button" class="filter-drawer__close sort" aria-label="{{ 'general.accessibility.close_modal' | t }}" data-close-icon>
-      {% render 'icon-button' with icon: 'close-stroke' %}
+      {% render 'icon-button' with icon, icon: 'close-stroke' %}
     </button>
     <div class="filter-drawer__content sort__content" data-scroll-lock-ignore>
       <div class="filter-drawer__heading">
@@ -211,4 +199,46 @@
 
   </form>
 {%- endif -%}
-</div>
+</div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-button' with icon: 'close-stroke' %}"
+  to: "{% render 'icon-button' with icon, icon: 'close-stroke' %}"
+  position: 1214..1272
+- from: |-
+    {% render 'filter-item' with
+                              type: 'swatch',
+                              forloop: forloop,
+                              filter_value: filter_value
+                            %}
+  to: "{% render 'filter-item' with type, type: 'swatch', forloop: forloop, filter_value:
+    filter_value %}"
+  position: 3304..3402
+- from: |-
+    {% render 'filter-item' with
+                              type: 'chip',
+                              forloop: forloop,
+                              filter_value: filter_value
+                            %}
+  to: "{% render 'filter-item' with type, type: 'chip', forloop: forloop, filter_value:
+    filter_value %}"
+  position: 3496..3592
+- from: |-
+    {% render 'filter-item' with
+                              type: 'checkbox',
+                              forloop: forloop,
+                              filter_value: filter_value
+                            %}
+  to: "{% render 'filter-item' with type, type: 'checkbox', forloop: forloop, filter_value:
+    filter_value %}"
+  position: 3652..3752
+- from: "{% render 'icon' with icon: 'triangle' %}"
+  to: "{% render 'icon' with icon, icon: 'triangle' %}"
+  position: 7457..7504
+- from: "{% render 'icon-button' with icon: 'close-stroke' %}"
+  to: "{% render 'icon-button' with icon, icon: 'close-stroke' %}"
+  position: 7897..7955
+{%- endcomment -%}

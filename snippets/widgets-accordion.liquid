@@ -8,7 +8,7 @@
       {%- if block.settings.title != blank -%}
         <h4 class="widgets-accordion__item-heading ff-heading fs-heading-4-base">
           {%- unless block.settings.icon == 'none' -%}
-            {%- render 'icon' with icon: block.settings.icon -%}
+            {%- render 'icon' with icon, icon: block.settings.icon -%}
           {%- endunless -%}
           {{ block.settings.title }}
         </h4>
@@ -43,8 +43,20 @@
         >
           {{ 'products.product.estimate_shipping' | t }}
         </button>
-        {% render 'shipping-estimator-modal' with id: 'widget-accordion' %}
+        {% render 'shipping-estimator-modal' with id, id: 'widget-accordion' %}
       {%- endif -%}
     </div>
   </div>
-</div>
+</div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'icon' with icon: block.settings.icon -%}"
+  to: "{%- render 'icon' with icon, icon: block.settings.icon -%}"
+  position: 459..517
+- from: "{% render 'shipping-estimator-modal' with id: 'widget-accordion' %}"
+  to: "{% render 'shipping-estimator-modal' with id, id: 'widget-accordion' %}"
+  position: 1532..1603
+{%- endcomment -%}
