@@ -3,7 +3,7 @@
 	{% assign products = collections.all.products | sort: 'created_at' | reverse %}
 	<div class="new-item-layout">
 		{% for product in products limit: 4 %}
-			{% render 'product-item' with product: product %}
+			{% render 'product-item' with product, product: product %}
 		{% endfor %}
 	</div>
 	<a href="/collections/all" class="btn btn-theme01">新着商品をもっと見る</a>
@@ -13,3 +13,13 @@
   "name": "新着商品"
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'product-item' with product: product %}"
+  to: "{% render 'product-item' with product, product: product %}"
+  position: 257..315
+{% endcomment %}

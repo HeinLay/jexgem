@@ -30,14 +30,7 @@
   <div class="section__inner">
     <div class="inline-features__grid">
       {%- for block in section.blocks -%}
-        {% render 'inline-feature-item' with
-          show_image: block.settings.show_image,
-          image: block.settings.image,
-          heading: block.settings.heading,
-          subheading: block.settings.subheading,
-          text_max_width: block.settings.text_max_width,
-          column_heading_type: column_heading_type,
-        %}
+        {% render 'inline-feature-item' with show_image, show_image: block.settings.show_image, image: block.settings.image, heading: block.settings.heading, subheading: block.settings.subheading, text_max_width: block.settings.text_max_width, column_heading_type: column_heading_type %}
       {%- endfor -%}
     </div>
   </div>
@@ -151,3 +144,24 @@
     ]
   }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'inline-feature-item' with
+              show_image: block.settings.show_image,
+              image: block.settings.image,
+              heading: block.settings.heading,
+              subheading: block.settings.subheading,
+              text_max_width: block.settings.text_max_width,
+              column_heading_type: column_heading_type,
+            %}
+  to: "{% render 'inline-feature-item' with show_image, show_image: block.settings.show_image,
+    image: block.settings.image, heading: block.settings.heading, subheading: block.settings.subheading,
+    text_max_width: block.settings.text_max_width, column_heading_type: column_heading_type
+    %}"
+  position: 868..1147
+{% endcomment %}

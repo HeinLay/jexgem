@@ -23,7 +23,7 @@
       >
 
         <button type="button" class="filter-drawer__close" aria-label="{{ 'general.accessibility.close_modal' | t }}" data-close-icon>
-          {% render 'icon-button' with icon: 'close-stroke' %}
+          {% render 'icon-button' with icon, icon: 'close-stroke' %}
         </button>
         <div class="filter-drawer__content" data-scroll-lock-ignore>
           <div class="filter-drawer__heading">
@@ -65,3 +65,13 @@
   </form>
 {%- endif -%}
 
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-button' with icon: 'close-stroke' %}"
+  to: "{% render 'icon-button' with icon, icon: 'close-stroke' %}"
+  position: 977..1035
+{% endcomment %}

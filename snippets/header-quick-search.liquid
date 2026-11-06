@@ -3,7 +3,7 @@
 
   <div class="quick-search__container popover">
     <button type="button" class="quick-search__close" aria-label="{{ 'general.accessibility.close_modal' | t }}" data-close-icon>
-      {% render 'icon-button' with icon: 'close-stroke' %}
+      {% render 'icon-button' with icon, icon: 'close-stroke' %}
     </button>
 
     <div class="quick-search__heading ff-heading fs-heading-2-base fs-heading-2-large-ns">{{ 'search.search' | t }}</div>
@@ -21,10 +21,10 @@
         />
         <div class="quick-search__actions">
           <button class="quick-search__clear" type="button" data-clear aria-label="{{ 'search.clear_search' | t }}">
-            {% render 'icon' with icon: 'close-stroke' %}
+            {% render 'icon' with icon, icon: 'close-stroke' %}
           </button>
           <button class="quick-search__submit" type="submit" aria-label="{{ 'search.search' | t }}">
-            {% render 'icon' with icon: 'arrow-stroke' %}
+            {% render 'icon' with icon, icon: 'arrow-stroke' %}
           </button>
         </div>
       </div>
@@ -38,3 +38,19 @@
   </div>
 </div>
 
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-button' with icon: 'close-stroke' %}"
+  to: "{% render 'icon-button' with icon, icon: 'close-stroke' %}"
+  position: 287..345
+- from: "{% render 'icon' with icon: 'close-stroke' %}"
+  to: "{% render 'icon' with icon, icon: 'close-stroke' %}"
+  position: 1093..1144
+- from: "{% render 'icon' with icon: 'arrow-stroke' %}"
+  to: "{% render 'icon' with icon, icon: 'arrow-stroke' %}"
+  position: 1278..1329
+{% endcomment %}

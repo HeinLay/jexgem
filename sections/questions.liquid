@@ -16,13 +16,7 @@
 
     <div class="questions__accordion" aria-label="{{ 'general.accessibility.accordion_groups' | t }}">
       {%- for block in section.blocks -%}
-        {%- render 'questions-item' with
-          forloop: forloop,
-          block: block,
-          question: block.settings.title,
-          answer: block.settings.answer,
-          author: block.settings.author,
-        -%}
+        {%- render 'questions-item' with forloop, forloop: forloop, block: block, question: block.settings.title, answer: block.settings.answer, author: block.settings.author -%}
       {%- endfor -%}
     </div>
   </div>
@@ -99,3 +93,22 @@
     ]
   }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%- render 'questions-item' with
+              forloop: forloop,
+              block: block,
+              question: block.settings.title,
+              answer: block.settings.answer,
+              author: block.settings.author,
+            -%}
+  to: "{%- render 'questions-item' with forloop, forloop: forloop, block: block, question:
+    block.settings.title, answer: block.settings.answer, author: block.settings.author
+    -%}"
+  position: 734..904
+{% endcomment %}
